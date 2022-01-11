@@ -124,9 +124,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/gabi',function(){
-    return 'sssss';
+    return 'ssarrs';
 });
 
 Route::get('/test', function(){
-   return 'abcd';
+   return 'abcstars';
 });
