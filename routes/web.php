@@ -22,7 +22,7 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
-Route::get('/',function(){
+Route::get('/', function () {
     return 'test';
 });
 
@@ -107,13 +107,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}/delete', function ($id) {
         $user = DB::table('users')->where('id', $id)->first();
 
-//        return Inertia::render('Users/Delete', [
-//            'id' => $id,
-//            'name' => $user->name,
+        return Inertia::render('Users/Delete', [
+            'id' => $id,
+            'name' => $user->name,
 //            'email' => $user->email,
 //            'role' => $user->role,
-//        ]);
-        return $user->delete();
+        ]);
+    })->middleware('can:edit,App\Models\User');
+
+    Route::post('/user/{id}/deleted', function ($id) {
+
+        User::find($id)->delete();
+        return redirect('/users?user-'. $id .'=deleted');
+
     })->middleware('can:edit,App\Models\User');
 
 

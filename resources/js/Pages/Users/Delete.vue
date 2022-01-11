@@ -5,24 +5,20 @@
         <div class="mb-6">
             <div class="flex items-center mb-2">
 
-                <label for="delete" class="pl-2 uppercase font-bold text-xs text-gray-700">
-                    <input v-model="form.yes" type="radio" name="delete" id="delete"
-                           class="border border-gray-400 p-2">
-                    YES</label>
-            </div>
-            <div class="flex items-center mb-2">
+                <label for="delete" class="pl-2 font-bold text-xs text-gray-700">
 
-                <label for="no-delete" class="pl-2 uppercase font-bold text-xs text-gray-700">
-                    <input v-model="form.no" type="radio" name="no-delete" id="no-delete"
-                           class="border border-gray-400 p-2" checked>
-                    NO</label>
+                    Are you sure you want to delete <u class="uppercase">{{props.name}}</u> user?</label>
             </div>
 
         </div>
         <div class="mb-8">
-            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-bllue-500"
+            <button type="submit" class="bg-red-400 text-white rounded py-2 px-4 hover:bg-red-500"
                     :disabled="form.processing">
-                Submit
+                YES, Delete user
+            </button>
+            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 ml-5 hover:bg-blue-500"
+                    >
+                <Link href="/users">Go back</Link>
             </button>
         </div>
     </form>
@@ -32,16 +28,15 @@
 import {useForm} from "@inertiajs/inertia-vue3";
 
 let props = defineProps({
-    id: Number
+    id: Number,
+    name: Object
 });
 
 let form = useForm({
-    id: props.id,
-    yes: true,
-    no: false
+    id: props.id
 });
 
 let submit = () => {
-    form.post('/users');
+    form.post(`/user/${form.id}/deleted`);
 }
 </script>
