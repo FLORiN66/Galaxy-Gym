@@ -126,3 +126,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/gabi',function(){
     return 'sssss';
 });
+
+Route::get('/test', function(){
+   return 'abcd';
+});
