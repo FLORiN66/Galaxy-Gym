@@ -120,13 +120,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     });
-    
+
 });
 
-Route::get('/gabi',function(){
-    return 'ssarrs';
-});
-
-Route::get('/test', function(){
-   return 'abcstars';
-});
