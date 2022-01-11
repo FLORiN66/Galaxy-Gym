@@ -116,3 +116,7 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Settings');
     });
 });
+
+Route::get('/test', function(){
+   return 'abcd';
+});
