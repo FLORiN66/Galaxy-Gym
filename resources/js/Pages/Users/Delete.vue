@@ -16,7 +16,7 @@
                     :disabled="form.processing">
                 YES, Delete user
             </button>
-            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 ml-5 hover:bg-blue-500"
+            <button class="bg-blue-400 text-white rounded py-2 px-4 ml-5 hover:bg-blue-500"
                     >
                 <Link href="/users">Go back</Link>
             </button>

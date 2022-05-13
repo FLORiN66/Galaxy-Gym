@@ -90,7 +90,6 @@ var _hoisted_9 = {
 };
 var _hoisted_10 = ["disabled"];
 var _hoisted_11 = {
-  type: "submit",
   "class": "bg-blue-400 text-white rounded py-2 px-4 ml-5 hover:bg-blue-500"
 };
 
