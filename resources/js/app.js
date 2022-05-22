@@ -26,3 +26,22 @@ createInertiaApp({
 InertiaProgress.init({
     showSpinner: true
 });
+
+
+window.onload = () => {
+    //Get all the parameters from URL and check if loggedin param exist
+    try {
+        let paramString = window.location.href.split('?')[1];
+        if( paramString && paramString.includes('loggedin')) throw 'You are already connected!';
+    } catch( err ) {
+        var error = document.getElementById('messages');
+        error.innerHTML = `<p class="error">${err}</p>`;
+        error.addEventListener('remove', () => {
+
+        });
+        setTimeout(()=> {
+            document.querySelector('#messages .error').remove();
+        }, 2000);
+    }
+}
+

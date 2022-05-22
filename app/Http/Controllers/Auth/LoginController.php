@@ -9,7 +9,15 @@ use Inertia\Inertia;
 
 class LoginController extends Controller {
     public function create() {
-        return Inertia::render('Auth/Login');
+        if (! Auth::check()) {
+            return Inertia::render('Auth/Login');
+        } else {
+            return redirect(url()->previous() . '?loggedin');
+        }
+    }
+
+    public function already_logged_in(){
+        return 'User already logged in';
     }
 
     public function store(Request $request) {

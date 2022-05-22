@@ -1,1 +1,7 @@
+.error {
+    padding: 5px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid red;
+    border-left: 7px solid red;
+}
 

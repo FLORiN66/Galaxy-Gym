@@ -1,6 +1,6 @@
 <template>
-    <Link 
-        class="text-black-500 hover:underline" 
+    <Link
+        class="text-black-500 hover:underline"
         :class="{'font-bold underline' : active}">
     <slot />
     </Link>
@@ -14,5 +14,5 @@ export default {
     props: {
         active: Boolean
     }
-};  
+};
 </script>

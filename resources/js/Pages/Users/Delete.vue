@@ -7,7 +7,7 @@
 
                 <label for="delete" class="pl-2 font-bold text-xs text-gray-700">
 
-                    Are you sure you want to delete <u class="uppercase">{{props.name}}</u> user?</label>
+                    Are you sure you want to delete <u class="uppercase">{{ props.name }}</u> user?</label>
             </div>
 
         </div>
@@ -16,8 +16,7 @@
                     :disabled="form.processing">
                 YES, Delete user
             </button>
-            <button class="bg-blue-400 text-white rounded py-2 px-4 ml-5 hover:bg-blue-500"
-                    >
+            <button class="bg-blue-400 text-white rounded py-2 px-4 ml-5 hover:bg-blue-500">
                 <Link href="/users">Go back</Link>
             </button>
         </div>
