@@ -61,7 +61,6 @@ Route::middleware( 'auth' )->group( function () {
     Route::post( '/users', function () {
         //validate the request
         $attributes = Request::validate( [
-            'id'       => '',
             'name'     => 'required',
             'email'    => [ 'required', 'email' ],
             'password' => 'required',
