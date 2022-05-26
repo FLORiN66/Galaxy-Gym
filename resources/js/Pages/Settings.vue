@@ -1,7 +1,7 @@
 <template>
-        <Head title="Settings"/>
-        <h1 class="text-4xl font-bold">Settings</h1>
-    <div>
+    <Head title="Settings"/>
+    <PageHeader>Settings</PageHeader>
+    <div class="p-4">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
@@ -144,3 +144,10 @@
         </div>
     </div>
 </template>
+<script>
+import PageHeader from "../Shared/PageHeader";
+
+export default {
+    components: {PageHeader}
+};
+</script>

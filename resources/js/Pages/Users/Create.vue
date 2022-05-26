@@ -1,6 +1,6 @@
 <template>
     <Head title="Create User"/>
-    <h1 class="text-3xl">Create New User</h1>
+    <PageHeader>Create New User</PageHeader>
     <form @submit.prevent="submit" class="max-w-md mx-auto mt-8">
         <div class="mb-6">
             <label for="name" class="block mb-2 uppercase font-bold text-xs text-gray-700">Name*</label>
@@ -40,6 +40,7 @@
 
 <script setup>
 import {useForm} from "@inertiajs/inertia-vue3";
+import PageHeader from "../../Shared/PageHeader";
 
 let form = useForm({
     id: '',
@@ -53,4 +54,5 @@ let form = useForm({
 let submit = () => {
     form.post('/users');
 }
+
 </script>
