@@ -1,6 +1,6 @@
 <template>
     <Head title="Login"/>
-    <main class="grid place-items-center min-h-screen">
+    <main class="grid place-items-center min-h-screen -mt-12">
         <section class="bg-white p-8 rounded-xl max-w-md mx-auto mt-8 border">
             <h1 class="text-3xl mb-6">Login</h1>
             <form @submit.prevent="submit">

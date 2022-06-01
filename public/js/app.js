@@ -138,7 +138,7 @@ var _hoisted_3 = {
   "class": "flex flex-col md:flex-row"
 };
 var _hoisted_4 = {
-  "class": "w-full"
+  "class": "w-full pb-20 md:pb-0"
 };
 var _hoisted_5 = {
   id: "main",

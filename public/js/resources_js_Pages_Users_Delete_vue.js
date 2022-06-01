@@ -85,7 +85,7 @@ var _hoisted_7 = {
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" user?");
 
 var _hoisted_9 = {
-  "class": "mb-8"
+  "class": "mb-8 flex justify-between"
 };
 var _hoisted_10 = ["disabled"];
 var _hoisted_11 = {

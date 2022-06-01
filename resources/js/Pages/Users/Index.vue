@@ -1,14 +1,16 @@
 <template>
     <Head title="Users"/>
     <PageHeader>Users</PageHeader>
-    <div class="flex justify-between mb-6">
-        <Link v-if="can.createUser" href="/users/create" class="text-blue-500 text-sm ml-3"> New User </Link>
+    <div class="flex justify-between mb-6 p-5">
+        <!--        <Link v-if="can.createUser" href="/users/create" class="text-blue-500 text-sm ml-3"> New User </Link>-->
+        <Button v-if="can.createUser" href="/users/create">New User</Button>
+
         <input v-model="search" type="text" placeholder="Search" class="border px-2 rounded-lg">
     </div>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="flex flex-col">
         <div class="overflow-x-auto">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="py-2 align-middle inline-block min-w-full p-5">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -34,9 +36,8 @@
                                 <Link :href="`/user/${user.id}/edit`" class="text-indigo-600 hover:text-indigo-900">
                                     Edit
                                 </Link>
-                                <Link :href="`/user/${user.id}/delete`" class="text-white bg-red-500 px-2 py-1 ml-5 rounded hover:bg-red-600">
-                                    Delete
-                                </Link>
+                                <Button :href="`/user/${user.id}/delete`" :deleteButton="true" class="ml-4">Delete
+                                </Button>
                             </td>
                         </tr>
                         </tbody>
@@ -54,6 +55,7 @@
 import {ref, watch} from "vue";
 import Pagination from "../../Shared/Pagination";
 import PageHeader from "../../Shared/PageHeader";
+import Button from "../../Shared/Button";
 import {Inertia} from "@inertiajs/inertia";
 //Search every 500 milliseconds
 // import {throttle} from "lodash/function";
@@ -63,12 +65,12 @@ import {debounce} from "lodash/function";
 let props = defineProps({
     users: Object,
     filters: Object,
-    can : Object
+    can: Object
 });
 
 //default value for search
 let search = ref(props.filters.search);
-watch(search, debounce(function (value){
+watch(search, debounce(function (value) {
     Inertia.get('/users', {
         search: value
     }, {
@@ -77,6 +79,6 @@ watch(search, debounce(function (value){
         //replace current url if is the same (for input search)
         replace: true
     })
-},300));
+}, 300));
 
 </script>

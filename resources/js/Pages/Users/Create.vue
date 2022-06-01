@@ -29,17 +29,19 @@
 
             <div v-if="form.errors.role" v-text="form.errors.role" class="text-red-500 text-xs mt-1"></div>
         </div>
-        <div class="mb-8">
-            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-bllue-500"
+        <div class="mb-8 flex justify-between">
+            <button type="submit" class="hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2 px-4 border hover:border-blue-500 border-transparent rounded"
                     :disabled="form.processing">
                 Submit
             </button>
+            <Button href="/users">Go back</Button>
         </div>
     </form>
 </template>
 
 <script setup>
 import {useForm} from "@inertiajs/inertia-vue3";
+import Button from "../../Shared/Button";
 import PageHeader from "../../Shared/PageHeader";
 
 let form = useForm({
