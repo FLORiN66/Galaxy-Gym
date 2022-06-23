@@ -5,7 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,5 +123,9 @@ Route::middleware( 'auth' )->group( function () {
     Route::get( '/settings', function () {
         return Inertia::render( 'Settings' );
     } );
+
+    //Image uploader
+    Route::get('/images', [ImageController::class, 'show']);
+    Route::post('/upload', [ImageController::class, 'store']);
 } );
 
