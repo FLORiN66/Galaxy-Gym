@@ -12,9 +12,12 @@
     "devDependencies": {
         "@vue/compiler-sfc": "^3.2.22",
         "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
+        "filepond": "^4.30.4",
+        "filepond-plugin-file-validate-type": "^1.2.8",
+        "laravel-mix": "^6.0.49",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
+        "vue-filepond": "^7.0.3",
         "vue-loader": "^16.8.3",
         "vue-template-compiler": "^2.6.14"
     },
