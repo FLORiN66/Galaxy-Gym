@@ -17,6 +17,8 @@ class Subscriptions extends Migration
             $table->id();
             $table->string('name');
             $table->integer('value');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

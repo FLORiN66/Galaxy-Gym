@@ -50,6 +50,7 @@ let form = useForm({
     email: '',
     password: '',
     role: 'subscriber',
+    subscription: null,
     new_user: true
 });
 

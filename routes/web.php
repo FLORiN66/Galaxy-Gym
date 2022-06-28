@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Models\subcriptions;
+use App\Models\subscriptions;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -62,21 +62,23 @@ Route::middleware( 'auth' )->group( function () {
     Route::post( '/users', function () {
         //validate the request
         $attributes = Request::validate( [
-            'name'     => 'required',
-            'email'    => [ 'required', 'email' ],
-            'password' => 'required',
-            'role'     => 'required',
-            'new_user' => 'required'
+            'name'         => 'required',
+            'email'        => [ 'required', 'email' ],
+            'password'     => 'required',
+            'subscription' => '',
+            'role'         => 'required',
+            'new_user'     => 'required'
         ] );
         //create or update the user
         if ( ! $attributes['new_user'] ) {
             DB::table( 'users' )
               ->where( 'id', $attributes['id'] )
               ->update( [
-                  'name'     => $attributes['name'],
-                  'email'    => $attributes['email'],
-                  'password' => bcrypt( $attributes['password'] ),
-                  'role'     => $attributes['role']
+                  'name'         => $attributes['name'],
+                  'email'        => $attributes['email'],
+                  'password'     => bcrypt( $attributes['password'] ),
+                  'subscription' => $attributes['subscription'],
+                  'role'         => $attributes['role']
               ] );
         } else if ( User::where( 'email', '=', $attributes['email'] )->exists() && $attributes['new_user'] ) {
             return "<h1 style='display: flex;justify-content: center;align-items: center;height: 100%;'>This email is already used</h1>";
@@ -126,17 +128,76 @@ Route::middleware( 'auth' )->group( function () {
     } );
 
     //Image uploader
-    Route::get('/image', [ImageController::class, 'show']);
-    Route::post('/upload', [ImageController::class, 'store']);
+    Route::get( '/image', [ ImageController::class, 'show' ] );
+    Route::post( '/upload', [ ImageController::class, 'store' ] );
 
     //Subscription
     Route::get( '/subscriptions', function () {
         return Inertia::render( 'Subscriptions/Index', [
-            'subscriptions'   => subcriptions::query(),
-            'can'     => [
-                'createUser' => Auth::user()->can( 'create', User::class )
+            'subscriptions' => subscriptions::all(),
+            'can'           => [
+                'edit' => Auth::user()->can( 'create', User::class )
             ]
         ] );
     } )->middleware( 'can:create,App\Models\User' );
+
+    Route::post( '/subscriptions', function () {
+        //validate the request
+        $attributes = Request::validate( [
+            'name'             => 'required',
+            'value'            => 'required',
+            'new_subscription' => 'required'
+        ] );
+        //create or update the user
+        if ( ! $attributes['new_subscription'] ) {
+            DB::table( 'subscriptions' )
+              ->where( 'id', $attributes['id'] )
+              ->update( [
+                  'name'  => $attributes['name'],
+                  'value' => $attributes['value'],
+              ] );
+        } else if ( subscriptions::where( 'name', '=', $attributes['name'] )->exists() && $attributes['new_subscription'] ) {
+            return "<h1 style='display: flex;justify-content: center;align-items: center;height: 100%;'>This subscription is already used</h1>";
+        } else {
+            subscriptions::create( $attributes );
+        }
+
+        //redirect
+        return redirect( '/subscriptions' );
+    } );
+
+    //Create subscription
+    Route::get( '/subscriptions/create', function () {
+        return Inertia::render( 'Subscriptions/Create' );
+    } )->middleware( 'can:create,App\Models\User' );
+
+    //Edit subscription
+    Route::get( '/subscription/{id}/edit', function ( $id ) {
+        $user = DB::table( 'subscriptions' )->where( 'id', $id )->first();
+
+        return Inertia::render( 'Subscriptions/Edit', [
+            'id'    => $id,
+            'name'  => $user->name,
+            'value' => $user->value,
+        ] );
+    } )->middleware( 'can:edit,App\Models\User' );
+
+    //Delete subscription
+    Route::get( '/subscription/{id}/delete', function ( $id ) {
+        $user = DB::table( 'subscriptions' )->where( 'id', $id )->first();
+
+        return Inertia::render( 'Subscriptions/Delete', [
+            'id'   => $id,
+            'name' => $user->name,
+        ] );
+    } )->middleware( 'can:edit,App\Models\User' );
+
+    Route::post( '/subscription/{id}/deleted', function ( $id ) {
+
+        subscriptions::find( $id )->delete();
+
+        return redirect( '/subscriptions?user-' . $id . '=deleted' );
+
+    } )->middleware( 'can:edit,App\Models\User' );
 } );
 

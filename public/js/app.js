@@ -804,6 +804,30 @@ var map = {
 		"/js/vendor",
 		"resources_js_Pages_Settings_vue"
 	],
+	"./Subscriptions/Create": [
+		"./resources/js/Pages/Subscriptions/Create.vue",
+		"resources_js_Pages_Subscriptions_Create_vue"
+	],
+	"./Subscriptions/Create.vue": [
+		"./resources/js/Pages/Subscriptions/Create.vue",
+		"resources_js_Pages_Subscriptions_Create_vue"
+	],
+	"./Subscriptions/Delete": [
+		"./resources/js/Pages/Subscriptions/Delete.vue",
+		"resources_js_Pages_Subscriptions_Delete_vue"
+	],
+	"./Subscriptions/Delete.vue": [
+		"./resources/js/Pages/Subscriptions/Delete.vue",
+		"resources_js_Pages_Subscriptions_Delete_vue"
+	],
+	"./Subscriptions/Edit": [
+		"./resources/js/Pages/Subscriptions/Edit.vue",
+		"resources_js_Pages_Subscriptions_Edit_vue"
+	],
+	"./Subscriptions/Edit.vue": [
+		"./resources/js/Pages/Subscriptions/Edit.vue",
+		"resources_js_Pages_Subscriptions_Edit_vue"
+	],
 	"./Subscriptions/Index": [
 		"./resources/js/Pages/Subscriptions/Index.vue",
 		"resources_js_Pages_Subscriptions_Index_vue"
