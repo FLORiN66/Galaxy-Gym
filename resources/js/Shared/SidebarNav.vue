@@ -16,6 +16,11 @@
                         </NavLink>
                     </li>
                     <li class="mr-3 flex-1">
+                        <NavLink href="/subscriptions" :active="$page.component === 'Subscriptions/Index'">
+                            <i class="fa-solid fa-layer-group pr-0 md:pr-3"></i>Subscriptions
+                        </NavLink>
+                    </li>
+                    <li class="mr-3 flex-1">
                         <NavLink href="/settings" :active="$page.component === 'Settings'">
                             <i class="fas fa-tasks pr-0 md:pr-3"></i>Settings
                         </NavLink>

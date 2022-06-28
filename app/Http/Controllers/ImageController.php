@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class ImageController extends Controller {
     public function show() {
         //return all images
+        $last_id = Image::count();
+        return Image::where('id', $last_id)->value('path');
     }
 
     public function store( Request $request ) {
@@ -17,7 +19,7 @@ class ImageController extends Controller {
         }
 
         $request->validate( [
-            'image' => 'required|file|image'
+            'image' => 'required|file|image|mimes:jpg,jpeg,png'
         ] );
         //save the file in storage
         $path        = $request->file( 'image' )->store( '/public/images' );
@@ -37,6 +39,6 @@ class ImageController extends Controller {
         ] );
 
         //return that image model back to the frontend
-        return $image;
+        return $image->path;
     }
 }

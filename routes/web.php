@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\subcriptions;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -125,7 +126,17 @@ Route::middleware( 'auth' )->group( function () {
     } );
 
     //Image uploader
-    Route::get('/images', [ImageController::class, 'show']);
+    Route::get('/image', [ImageController::class, 'show']);
     Route::post('/upload', [ImageController::class, 'store']);
+
+    //Subscription
+    Route::get( '/subscriptions', function () {
+        return Inertia::render( 'Subscriptions/Index', [
+            'subscriptions'   => subcriptions::query(),
+            'can'     => [
+                'createUser' => Auth::user()->can( 'create', User::class )
+            ]
+        ] );
+    } )->middleware( 'can:create,App\Models\User' );
 } );
 

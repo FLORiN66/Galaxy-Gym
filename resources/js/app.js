@@ -1,3 +1,7 @@
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import { createApp, h } from 'vue';
 import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
@@ -19,7 +23,7 @@ createInertiaApp({
       .component("Head", Head)
       .mount(el)
   },
-  title: title => `My app - ${title}`
+  title: title => `${title} - Galaxy Gym`
 });
 
 

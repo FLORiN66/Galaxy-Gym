@@ -3,15 +3,7 @@
         <title>Galaxy Gym</title>
         <meta type="description" content="This is an app created by Florin Moisei" head-key="description">
     </Head>
-<!--    <section class="p-6 bg-gray-200">-->
-<!--        <header class="flex justify-between">-->
-<!--            <div class="flex items-center">-->
-<!--                <h1 class="font-bold text-lg">Users management</h1>-->
-<!--                <p class="text-sm ml-4">Welcome back, {{ username }}</p>-->
-<!--            </div>-->
-<!--            <Nav/>-->
-<!--        </header>-->
-<!--    </section>-->
+
     <section>
         <header>
             <Nav />

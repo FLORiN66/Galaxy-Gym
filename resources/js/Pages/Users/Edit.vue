@@ -19,13 +19,6 @@
         </div>
         <div id="advanced_options" class="mb-6" v-if="showAdvanced">
             <div class="mb-6">
-                <label for="upload" class="block mb-2 uppercase font-bold text-xs text-gray-700">Upload profile picture</label>
-                <input type="file" @input="form.avatar = $event.target.files[0]" />
-                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                    {{ form.progress.percentage }}%
-                </progress>
-            </div>
-            <div class="mb-6">
                 <label for="password" class="block mb-2 uppercase font-bold text-xs text-gray-700">Password*</label>
                 <input v-model="form.password" type="password" name="password" id="password"
                        class="border border-gray-400 p-2 w-full" required>
@@ -72,7 +65,6 @@ let form = useForm({
     password: props.password,
     role: props.role,
     new_user: false,
-    avatar: null,
 });
 
 let submit = () => {
