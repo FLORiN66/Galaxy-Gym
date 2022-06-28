@@ -15,13 +15,22 @@
             <div v-if="form.errors.email" v-text="form.errors.email" class="text-red-500 text-xs mt-1"></div>
         </div>
         <div class="mb-6">
+            <label for="subscription" class="block mb-2 uppercase font-bold text-xs text-gray-700">Subscription*</label>
+            <select v-model="form.subscription" name="subscription" id="subscription">
+                <option v-for="subscription in subscriptions" :key="subscription.id" :value="subscription.id"
+                        v-text="`${subscription.name} - ${subscription.value}`"/>
+            </select>
+
+            <div v-if="form.errors.subscriptions" v-text="form.errors.subscriptions" class="text-red-500 text-xs mt-1"></div>
+        </div>
+        <div class="mb-6">
             <button @click="toggleAdvanced" type="button" class="block mb-2 uppercase font-bold text-xs text-blue-700">Advanced options</button>
         </div>
         <div id="advanced_options" class="mb-6" v-if="showAdvanced">
             <div class="mb-6">
                 <label for="password" class="block mb-2 uppercase font-bold text-xs text-gray-700">Password*</label>
                 <input v-model="form.password" type="password" name="password" id="password"
-                       class="border border-gray-400 p-2 w-full" required>
+                       class="border border-gray-400 p-2 w-full">
                 <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-xs mt-1"></div>
             </div>
             <div class="mb-6">
@@ -51,10 +60,12 @@ import PageHeader from "../../Shared/PageHeader";
 
 
 let props = defineProps({
-    name: Object,
-    email: Object,
+    name: String,
+    email: String,
     password: String,
     role: String,
+    subscription: Number,
+    subscriptions: Array,
     id: Number
 });
 
@@ -64,10 +75,12 @@ let form = useForm({
     email: props.email,
     password: props.password,
     role: props.role,
+    subscription: props.subscription,
     new_user: false,
 });
 
 let submit = () => {
+    console.log(form)
     form.post('/users');
 }
 </script>

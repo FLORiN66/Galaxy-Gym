@@ -21,6 +21,16 @@
             <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-xs mt-1"></div>
         </div>
         <div class="mb-6">
+            <label for="subscription" class="block mb-2 uppercase font-bold text-xs text-gray-700">Subscription*</label>
+            <select v-model="form.subscription" name="subscription" id="subscription" required>
+                <option v-for="subscription in subscriptions" :key="subscription.id" :value="subscription.id"
+                        v-text="`${subscription.name} - ${subscription.value}`"/>
+            </select>
+
+            <div v-if="form.errors.subscriptions" v-text="form.errors.subscriptions"
+                 class="text-red-500 text-xs mt-1"></div>
+        </div>
+        <div class="mb-6">
             <label for="role" class="block mb-2 uppercase font-bold text-xs text-gray-700">Role*</label>
             <select v-model="form.role" name="role" id="role">
                 <option value="administrator">Administrator</option>
@@ -30,7 +40,8 @@
             <div v-if="form.errors.role" v-text="form.errors.role" class="text-red-500 text-xs mt-1"></div>
         </div>
         <div class="mb-8 flex justify-between">
-            <button type="submit" class="hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2 px-4 border hover:border-blue-500 border-transparent rounded"
+            <button type="submit"
+                    class="hover:bg-transparent bg-blue-500 hover:text-blue-700 font-semibold text-white py-2 px-4 border hover:border-blue-500 border-transparent rounded"
                     :disabled="form.processing">
                 Submit
             </button>
@@ -44,13 +55,17 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import Button from "../../Shared/Button";
 import PageHeader from "../../Shared/PageHeader";
 
+defineProps({
+    subscriptions: Array,
+});
+
 let form = useForm({
     id: '',
     name: '',
     email: '',
     password: '',
     role: 'subscriber',
-    subscription: null,
+    subscription: 0,
     new_user: true
 });
 

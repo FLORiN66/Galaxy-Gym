@@ -26,7 +26,7 @@
                         </NavLink>
                     </li>
                     <li class="mr-3 flex-1">
-                        <NavLink href="/logout" method="post">
+                        <NavLink as="button" href="/logout" method="post" class="text-left w-full">
                             <i class="fa-solid fa-right-from-bracket pr-0 md:pr-3"></i>Log Out
                         </NavLink>
                     </li>

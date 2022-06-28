@@ -56,23 +56,31 @@ Route::middleware( 'auth' )->group( function () {
     //Create new User
 
     Route::get( '/users/create', function () {
-        return Inertia::render( 'Users/Create' );
+        return Inertia::render( 'Users/Create', [
+            'subscriptions' => subscriptions::all()
+                                            ->map( fn( $subscription ) => [
+                                                'id'    => $subscription->id,
+                                                'name'  => $subscription->name,
+                                                'value' => $subscription->value
+                                            ] )
+        ] );
     } )->middleware( 'can:create,App\Models\User' );
 
-    Route::post( '/users', function () {
+    Route::post( '/users', function (Illuminate\Http\Request $request) {
         //validate the request
-        $attributes = Request::validate( [
+        $attributes =  $request->validate( [
             'name'         => 'required',
             'email'        => [ 'required', 'email' ],
             'password'     => 'required',
-            'subscription' => '',
+            'subscription' => 'required',
             'role'         => 'required',
             'new_user'     => 'required'
         ] );
+
         //create or update the user
         if ( ! $attributes['new_user'] ) {
             DB::table( 'users' )
-              ->where( 'id', $attributes['id'] )
+              ->where( 'id', $request['id'] )
               ->update( [
                   'name'         => $attributes['name'],
                   'email'        => $attributes['email'],
@@ -83,6 +91,7 @@ Route::middleware( 'auth' )->group( function () {
         } else if ( User::where( 'email', '=', $attributes['email'] )->exists() && $attributes['new_user'] ) {
             return "<h1 style='display: flex;justify-content: center;align-items: center;height: 100%;'>This email is already used</h1>";
         } else {
+//
             User::create( $attributes );
         }
 
@@ -95,10 +104,17 @@ Route::middleware( 'auth' )->group( function () {
         $user = DB::table( 'users' )->where( 'id', $id )->first();
 
         return Inertia::render( 'Users/Edit', [
-            'id'    => $id,
-            'name'  => $user->name,
-            'email' => $user->email,
-            'role'  => $user->role,
+            'id'            => $id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'role'          => $user->role,
+            'subscription'  => $user->subscription,
+            'subscriptions' => subscriptions::all()
+                                            ->map( fn( $subscription ) => [
+                                                'id'    => $subscription->id,
+                                                'name'  => $subscription->name,
+                                                'value' => $subscription->value
+                                            ] )
         ] );
     } )->middleware( 'can:edit,App\Models\User' );
 
@@ -109,8 +125,6 @@ Route::middleware( 'auth' )->group( function () {
         return Inertia::render( 'Users/Delete', [
             'id'   => $id,
             'name' => $user->name,
-//            'email' => $user->email,
-//            'role' => $user->role,
         ] );
     } )->middleware( 'can:edit,App\Models\User' );
 
@@ -193,7 +207,6 @@ Route::middleware( 'auth' )->group( function () {
     } )->middleware( 'can:edit,App\Models\User' );
 
     Route::post( '/subscription/{id}/deleted', function ( $id ) {
-
         subscriptions::find( $id )->delete();
 
         return redirect( '/subscriptions?user-' . $id . '=deleted' );
