@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Settings;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,5 +22,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('demo'),
             'role'  => 'administrator'
         ]);
+
+
+        $settings = [
+          ['name' => 'image', 'value' => ''],
+          ['name' => 'about', 'value' => ''],
+          ['name' => 'email', 'value' => ''],
+          ['name' => 'address', 'value' => ''],
+          ['name' => 'phone', 'value' => ''],
+        ];
+        Settings::insert($settings);
     }
 }

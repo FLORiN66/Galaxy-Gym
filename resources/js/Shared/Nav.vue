@@ -4,7 +4,7 @@
         <div class="flex flex-wrap items-center">
             <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
                 <Link href="/" aria-label="Home">
-<!--                    <img class="ml-5 mt-1 h-20" src="../../images/GalaxyGym.png" alt="">-->
+                    <img class="ml-5 mt-1 h-20" :src="`/${logo}`" alt="">
                 </Link>
             </div>
 
@@ -31,6 +31,9 @@ export default {
     computed: {
         username() {
             return this.$page.props.auth.user.username
+        },
+        logo() {
+            return this.$page.props.logo
         }
     }
 };

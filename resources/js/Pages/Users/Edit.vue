@@ -21,27 +21,25 @@
                         v-text="`${subscription.name} - ${subscription.value}`"/>
             </select>
 
-            <div v-if="form.errors.subscriptions" v-text="form.errors.subscriptions" class="text-red-500 text-xs mt-1"></div>
+            <div v-if="form.errors.subscriptions" v-text="form.errors.subscriptions"
+                 class="text-red-500 text-xs mt-1"></div>
+        </div>
+
+
+        <div class="mb-6">
+            <label for="password" class="block mb-2 uppercase font-bold text-xs text-gray-700">Password*</label>
+            <input v-model="form.password" type="password" name="password" id="password"
+                   class="border border-gray-400 p-2 w-full">
+            <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-xs mt-1"></div>
         </div>
         <div class="mb-6">
-            <button @click="toggleAdvanced" type="button" class="block mb-2 uppercase font-bold text-xs text-blue-700">Advanced options</button>
-        </div>
-        <div id="advanced_options" class="mb-6" v-if="showAdvanced">
-            <div class="mb-6">
-                <label for="password" class="block mb-2 uppercase font-bold text-xs text-gray-700">Password*</label>
-                <input v-model="form.password" type="password" name="password" id="password"
-                       class="border border-gray-400 p-2 w-full">
-                <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-xs mt-1"></div>
-            </div>
-            <div class="mb-6">
-                <label for="role" class="block mb-2 uppercase font-bold text-xs text-gray-700">Role*</label>
-                <select v-model="form.role" name="role" id="role" aria-required="required">
-                    <option value="administrator">Administrator</option>
-                    <option value="subscriber">Subscriber</option>
-                </select>
+            <label for="role" class="block mb-2 uppercase font-bold text-xs text-gray-700">Role*</label>
+            <select v-model="form.role" name="role" id="role" aria-required="required">
+                <option value="administrator">Administrator</option>
+                <option value="subscriber">Subscriber</option>
+            </select>
 
-                <div v-if="form.errors.role" v-text="form.errors.role" class="text-red-500 text-xs mt-1"></div>
-            </div>
+            <div v-if="form.errors.role" v-text="form.errors.role" class="text-red-500 text-xs mt-1"></div>
         </div>
 
         <div class="mb-8 flex justify-between">
@@ -49,7 +47,9 @@
                     :disabled="form.processing">
                 Submit
             </button>
-            <Link class="bg-blue-400 text-white rounded py-2 px-4 float-right hover:bg-bllue-500" href="/users"> Cancel </Link>
+            <Link class="bg-blue-400 text-white rounded py-2 px-4 float-right hover:bg-bllue-500" href="/users">
+                Cancel
+            </Link>
         </div>
     </form>
 </template>
@@ -80,22 +80,6 @@ let form = useForm({
 });
 
 let submit = () => {
-    console.log(form)
     form.post('/users');
-}
-</script>
-
-<script>
-export default  {
-    data() {
-        return {
-            showAdvanced: false
-        }
-    },
-    methods: {
-        toggleAdvanced() {
-            this.showAdvanced = !this.showAdvanced
-        }
-    }
 }
 </script>

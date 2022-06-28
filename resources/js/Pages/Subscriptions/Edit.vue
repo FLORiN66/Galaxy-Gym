@@ -31,9 +31,9 @@ import PageHeader from "../../Shared/PageHeader";
 
 
 let props = defineProps({
-    name: Object,
-    value: Number,
-    id: Number
+    name: String,
+    value: String,
+    id: String
 });
 
 let form = useForm({

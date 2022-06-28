@@ -15,52 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_PageHeader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Shared/PageHeader */ "./resources/js/Shared/PageHeader.vue");
 
 
-
-function setup(__props, _ref) {
-  var expose = _ref.expose;
-  var props = __props;
-  var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
-    id: props.id,
-    name: props.name,
-    email: props.email,
-    password: props.password,
-    role: props.role,
-    subscription: props.subscription,
-    new_user: false
-  });
-
-  var submit = function submit() {
-    console.log(form);
-    form.post('/users');
-  };
-
-  var __returned__ = {
-    props: props,
-    form: form,
-    submit: submit,
-    useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm,
-    PageHeader: _Shared_PageHeader__WEBPACK_IMPORTED_MODULE_1__["default"]
-  };
-  Object.defineProperty(__returned__, '__isScriptSetup', {
-    enumerable: false,
-    value: true
-  });
-  return __returned__;
-}
-
-var __default__ = {
-  data: function data() {
-    return {
-      showAdvanced: false
-    };
-  },
-  methods: {
-    toggleAdvanced: function toggleAdvanced() {
-      this.showAdvanced = !this.showAdvanced;
-    }
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/Object.assign(__default__, {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     name: String,
     email: String,
@@ -70,8 +25,38 @@ var __default__ = {
     subscriptions: Array,
     id: Number
   },
-  setup: setup
-}));
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose;
+    expose();
+    var props = __props;
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
+      id: props.id,
+      name: props.name,
+      email: props.email,
+      password: props.password,
+      role: props.role,
+      subscription: props.subscription,
+      new_user: false
+    });
+
+    var submit = function submit() {
+      form.post('/users');
+    };
+
+    var __returned__ = {
+      props: props,
+      form: form,
+      submit: submit,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm,
+      PageHeader: _Shared_PageHeader__WEBPACK_IMPORTED_MODULE_1__["default"]
+    };
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+});
 
 /***/ }),
 
@@ -131,54 +116,46 @@ var _hoisted_12 = ["textContent"];
 var _hoisted_13 = {
   "class": "mb-6"
 };
-var _hoisted_14 = {
-  key: 0,
-  id: "advanced_options",
-  "class": "mb-6"
-};
-var _hoisted_15 = {
-  "class": "mb-6"
-};
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "password",
   "class": "block mb-2 uppercase font-bold text-xs text-gray-700"
 }, "Password*", -1
 /* HOISTED */
 );
 
-var _hoisted_17 = ["textContent"];
-var _hoisted_18 = {
+var _hoisted_15 = ["textContent"];
+var _hoisted_16 = {
   "class": "mb-6"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "role",
   "class": "block mb-2 uppercase font-bold text-xs text-gray-700"
 }, "Role*", -1
 /* HOISTED */
 );
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "administrator"
 }, "Administrator", -1
 /* HOISTED */
 );
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "subscriber"
 }, "Subscriber", -1
 /* HOISTED */
 );
 
-var _hoisted_22 = [_hoisted_20, _hoisted_21];
-var _hoisted_23 = ["textContent"];
-var _hoisted_24 = {
+var _hoisted_20 = [_hoisted_18, _hoisted_19];
+var _hoisted_21 = ["textContent"];
+var _hoisted_22 = {
   "class": "mb-8 flex justify-between"
 };
-var _hoisted_25 = ["disabled"];
+var _hoisted_23 = ["disabled"];
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cancel ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -195,7 +172,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.submit && $setup.submit.apply($setup, arguments);
     }, ["prevent"])),
     "class": "max-w-md mx-auto mt-8",
@@ -258,14 +235,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "text-red-500 text-xs mt-1"
   }, null, 8
   /* PROPS */
-  , _hoisted_12)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[3] || (_cache[3] = function () {
-      return $options.toggleAdvanced && $options.toggleAdvanced.apply($options, arguments);
-    }),
-    type: "button",
-    "class": "block mb-2 uppercase font-bold text-xs text-blue-700"
-  }, "Advanced options")]), $data.showAdvanced ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+  , _hoisted_12)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $setup.form.password = $event;
     }),
     type: "password",
@@ -280,14 +251,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "text-red-500 text-xs mt-1"
   }, null, 8
   /* PROPS */
-  , _hoisted_17)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+  , _hoisted_15)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $setup.form.role = $event;
     }),
     name: "role",
     id: "role",
     "aria-required": "required"
-  }, _hoisted_22, 512
+  }, _hoisted_20, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.form.role]]), $setup.form.errors.role ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
@@ -295,18 +266,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "text-red-500 text-xs mt-1"
   }, null, 8
   /* PROPS */
-  , _hoisted_23)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_21)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     "class": "bg-blue-400 text-white rounded py-2 px-4 hover:bg-bllue-500",
     disabled: $setup.form.processing
   }, " Submit ", 8
   /* PROPS */
-  , _hoisted_25), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  , _hoisted_23), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     "class": "bg-blue-400 text-white rounded py-2 px-4 float-right hover:bg-bllue-500",
     href: "/users"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_26];
+      return [_hoisted_24];
     }),
     _: 1
     /* STABLE */

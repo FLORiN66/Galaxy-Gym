@@ -7,7 +7,10 @@
 
     <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet"/>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="{{ url('img/GalaxyGym.jpg') }}">
+    <link rel="icon" href="
+    @php
+        echo  \App\Models\Settings::where( 'name', 'image' )->get( 'value' )[0]->value;
+    @endphp ">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet"/>
 
     <script src="{{ mix('/js/manifest.js') }}" defer></script>

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Image;
+use App\Models\Settings;
 use App\Models\subscriptions;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +28,23 @@ Route::post( 'logout', [ LoginController::class, 'destroy' ] )->middleware( 'aut
 
 Route::middleware( 'auth' )->group( function () {
     Route::get( '/', function () {
-        return Inertia::render( 'Home' );
+        $subscriptions = subscriptions::all();
+        $total_revenue = 0;
+
+        foreach ( $subscriptions as $subscription ) {
+            $sub[ $subscription->id ] = (float) $subscription->value;
+            $total_revenue            += User::where( 'subscription', $subscription->id )->count() * (float) $subscription->value;
+        }
+
+        return Inertia::render( 'Home', [
+            'total_users'   => User::all()->count(),
+            'new_users'     => User::where( 'created_at', '>=', new DateTime( '-1 months' ) )->count(),
+            'total_revenue' => $total_revenue,
+            'about'         => Settings::where( 'name', 'about' )->get( 'value' )[0]->value,
+            'email'         => Settings::where( 'name', 'email' )->get( 'value' )[0]->value,
+            'phone'         => Settings::where( 'name', 'phone' )->get( 'value' )[0]->value,
+            'address'       => Settings::where( 'name', 'address' )->get( 'value' )[0]->value,
+        ] );
     } );
 
     Route::get( '/users/', function () {
@@ -54,7 +72,6 @@ Route::middleware( 'auth' )->group( function () {
     } );
 
     //Create new User
-
     Route::get( '/users/create', function () {
         return Inertia::render( 'Users/Create', [
             'subscriptions' => subscriptions::all()
@@ -66,9 +83,9 @@ Route::middleware( 'auth' )->group( function () {
         ] );
     } )->middleware( 'can:create,App\Models\User' );
 
-    Route::post( '/users', function (Illuminate\Http\Request $request) {
+    Route::post( '/users', function ( Illuminate\Http\Request $request ) {
         //validate the request
-        $attributes =  $request->validate( [
+        $attributes = $request->validate( [
             'name'         => 'required',
             'email'        => [ 'required', 'email' ],
             'password'     => 'required',
@@ -129,17 +146,10 @@ Route::middleware( 'auth' )->group( function () {
     } )->middleware( 'can:edit,App\Models\User' );
 
     Route::post( '/user/{id}/deleted', function ( $id ) {
-
         User::find( $id )->delete();
 
         return redirect( '/users?user-' . $id . '=deleted' );
-
     } )->middleware( 'can:edit,App\Models\User' );
-
-
-    Route::get( '/settings', function () {
-        return Inertia::render( 'Settings' );
-    } );
 
     //Image uploader
     Route::get( '/image', [ ImageController::class, 'show' ] );
@@ -155,9 +165,9 @@ Route::middleware( 'auth' )->group( function () {
         ] );
     } )->middleware( 'can:create,App\Models\User' );
 
-    Route::post( '/subscriptions', function () {
+    Route::post( '/subscriptions', function (Illuminate\Http\Request $request ) {
         //validate the request
-        $attributes = Request::validate( [
+        $attributes = $request->validate( [
             'name'             => 'required',
             'value'            => 'required',
             'new_subscription' => 'required'
@@ -165,7 +175,7 @@ Route::middleware( 'auth' )->group( function () {
         //create or update the user
         if ( ! $attributes['new_subscription'] ) {
             DB::table( 'subscriptions' )
-              ->where( 'id', $attributes['id'] )
+              ->where( 'id', $request['id'] )
               ->update( [
                   'name'  => $attributes['name'],
                   'value' => $attributes['value'],
@@ -211,6 +221,38 @@ Route::middleware( 'auth' )->group( function () {
 
         return redirect( '/subscriptions?user-' . $id . '=deleted' );
 
+    } )->middleware( 'can:edit,App\Models\User' );
+
+    //Settings
+    Route::get( '/settings', function () {
+        return Inertia::render( 'Settings', [
+            'image'   => Settings::where( 'name', 'image' )->get( 'value' )[0]->value,
+            'about'   => Settings::where( 'name', 'about' )->get( 'value' )[0]->value,
+            'email'   => Settings::where( 'name', 'email' )->get( 'value' )[0]->value,
+            'address' => Settings::where( 'name', 'address' )->get( 'value' )[0]->value,
+            'phone'   => Settings::where( 'name', 'phone' )->get( 'value' )[0]->value
+        ] );
+    } )->middleware( 'can:edit,App\Models\User' );
+
+    Route::post( '/settings', function () {
+        $attributes = Request::validate( [
+            'image'   => 'required',
+            'about'   => 'required',
+            'email'   => 'required',
+            'address' => 'required',
+            'phone'   => 'required',
+        ] );
+
+//        return $attributes;
+        $last_image = Image::count();
+
+        Settings::where( 'name', 'image' )->update( [ 'value' => Image::where( 'id', $last_image )->value( 'path' ) ] );
+        Settings::where( 'name', 'about' )->update( [ 'value' => $attributes['about'] ] );
+        Settings::where( 'name', 'email' )->update( [ 'value' => $attributes['email'] ] );
+        Settings::where( 'name', 'address' )->update( [ 'value' => $attributes['address'] ] );
+        Settings::where( 'name', 'phone' )->update( [ 'value' => $attributes['phone'] ] );
+
+        return redirect( '/settings' );
     } )->middleware( 'can:edit,App\Models\User' );
 } );
 

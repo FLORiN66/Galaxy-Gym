@@ -15,7 +15,7 @@
         <div class="flex flex-col md:flex-row">
             <SidebarNav/>
             <section class="w-full pb-20 md:pb-0">
-                <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 md:pb-5">
+                <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-12 md:pb-5">
                     <div id="messages"></div>
                     <slot/>
                 </div>

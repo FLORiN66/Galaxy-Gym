@@ -15,31 +15,31 @@
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                             <ImageUploader>Choose Profile Photo</ImageUploader>
+                            <input type="hidden" :value="form.image">
                             <div>
-                                <label for="about" class="block text-sm font-medium text-gray-700"> About </label>
+                                <label for="about" class="block text-sm font-medium text-gray-700"> Despre dvs. </label>
                                 <div class="mt-1">
-                                    <textarea id="about" name="about" rows="3"
+                                    <textarea v-model="form.about" id="about" name="about" rows="3"
                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                              placeholder="Despre dvs."></textarea>
+                                    ></textarea>
                                 </div>
                                 <p class="mt-2 text-sm text-gray-500">Scurta descriere a profilului dvs.</p>
                             </div>
                             <div class="col-span-6 sm:col-span-4">
-                                <label for="email-address" class="block text-sm font-medium text-gray-700">Email
-                                    address</label>
-                                <input type="email" name="email-address" id="email-address" autocomplete="email"
+                                <label for="email-address" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input v-model="form.email" type="email" name="email-address" id="email-address" autocomplete="email"
                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
 
                             <div class="col-span-6 sm:col-span-4">
                                 <label for="address" class="block text-sm font-medium text-gray-700">Adresa</label>
-                                <input type="text" name="email-address" id="address" autocomplete="address"
+                                <input v-model="form.address" type="text" name="email-address" id="address" autocomplete="address"
                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
 
                             <div class="col-span-6 sm:col-span-4">
                                 <label for="phone" class="block text-sm font-medium text-gray-700">Telefon</label>
-                                <input type="phone" name="email-address" id="phone" autocomplete="phone"
+                                <input v-model="form.phone" type="phone" name="email-address" id="phone" autocomplete="phone"
                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
 
@@ -58,12 +58,30 @@
     </div>
 
 </template>
-<script>
+<script setup>
 import PageHeader from "../Shared/PageHeader";
 import ImageUploader from "../Shared/ImageUploader";
+import {useForm} from "@inertiajs/inertia-vue3";
 
 
-export default {
-    components: {PageHeader, ImageUploader},
-};
+let props = defineProps({
+    image: String,
+    about: String,
+    email: String,
+    address: String,
+    phone: String
+});
+
+
+let form = useForm({
+    image: props.image,
+    about: props.about,
+    email: props.email,
+    address: props.address,
+    phone: props.phone
+});
+
+let submit = () => {
+    form.post(`/settings`);
+}
 </script>
