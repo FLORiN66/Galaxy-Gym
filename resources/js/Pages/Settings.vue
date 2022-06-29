@@ -15,7 +15,8 @@
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                             <ImageUploader>Choose Profile Photo</ImageUploader>
-                            <input type="hidden" :value="form.image">
+                            <label for="about" class="hidden"> Logo </label>
+                            <input type="text" class="hidden" v-model="form.image" id="image" name="image">
                             <div>
                                 <label for="about" class="block text-sm font-medium text-gray-700"> Despre dvs. </label>
                                 <div class="mt-1">

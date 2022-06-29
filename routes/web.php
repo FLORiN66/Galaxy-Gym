@@ -234,8 +234,9 @@ Route::middleware( 'auth' )->group( function () {
         ] );
     } )->middleware( 'can:edit,App\Models\User' );
 
-    Route::post( '/settings', function () {
-        $attributes = Request::validate( [
+    Route::post( '/settings', function (\Illuminate\Http\Request $request) {
+//        return $request->about;
+        $attributes = $request->validate( [
             'image'   => 'required',
             'about'   => 'required',
             'email'   => 'required',
@@ -243,14 +244,15 @@ Route::middleware( 'auth' )->group( function () {
             'phone'   => 'required',
         ] );
 
-//        return $attributes;
+//        return $attributes['about'];
         $last_image = Image::count();
+//        return Image::where( 'id', $last_image )->value( 'path' );
 
+        Settings::where( 'name', 'about' )->update( [ 'value' => $request->about ] );
+        Settings::where( 'name', 'email' )->update( [ 'value' => $request->email ] );
+        Settings::where( 'name', 'address' )->update( [ 'value' => $request->address ] );
+        Settings::where( 'name', 'phone' )->update( [ 'value' => $request->phone ] );
         Settings::where( 'name', 'image' )->update( [ 'value' => Image::where( 'id', $last_image )->value( 'path' ) ] );
-        Settings::where( 'name', 'about' )->update( [ 'value' => $attributes['about'] ] );
-        Settings::where( 'name', 'email' )->update( [ 'value' => $attributes['email'] ] );
-        Settings::where( 'name', 'address' )->update( [ 'value' => $attributes['address'] ] );
-        Settings::where( 'name', 'phone' )->update( [ 'value' => $attributes['phone'] ] );
 
         return redirect( '/settings' );
     } )->middleware( 'can:edit,App\Models\User' );

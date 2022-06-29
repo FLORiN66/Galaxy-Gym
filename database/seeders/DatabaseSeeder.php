@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        \App\Models\User::factory(100)->create();
+        \App\Models\User::factory(100)->create();
         DB::table('users')->insert([
             'name' => 'demo',
             'email' => 'demo@demo.com',
@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
 
 
         $settings = [
-          ['name' => 'image', 'value' => ''],
-          ['name' => 'about', 'value' => ''],
-          ['name' => 'email', 'value' => ''],
-          ['name' => 'address', 'value' => ''],
-          ['name' => 'phone', 'value' => ''],
+          ['name' => 'image', 'value' => '/'],
+          ['name' => 'about', 'value' => null],
+          ['name' => 'email', 'value' => null],
+          ['name' => 'address', 'value' => null],
+          ['name' => 'phone', 'value' => null],
         ];
         Settings::insert($settings);
     }

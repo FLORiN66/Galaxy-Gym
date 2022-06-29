@@ -1,6 +1,6 @@
 <template>
-    <Head title="Edit Subscription"/>
-    <PageHeader>Edit Subscription</PageHeader>
+    <Head title="New Subscription"/>
+    <PageHeader>New Subscription</PageHeader>
     <form @submit.prevent="submit" class="max-w-md mx-auto mt-8" :id="'user-' + form.id">
         <div class="mb-6">
             <label for="name" class="block mb-2 uppercase font-bold text-xs text-gray-700">Name*</label>

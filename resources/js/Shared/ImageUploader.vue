@@ -63,6 +63,7 @@ export default {
                 return;
             }
 
+            document.querySelector('#main input#image').value = file.serverId
             this.image = file.serverId;
         }
     }
